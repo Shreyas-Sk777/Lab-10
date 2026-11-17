@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 10 (c) - Age Verification Form</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.php" class="back-link">← Back to Lab 10 Home</a>
+
+        <div class="card">
+            <h2 class="card-title">Part C: Age Verification Gatekeeper</h2>
+            <p class="card-desc">Enter your name and age below. The PHP backend checks whether you meet the age eligibility requirement (18+).</p>
+
+            <!-- Requirement: Takes name and age from an HTML page -->
+            <form action="verify.php" method="POST">
+                <!-- User Name -->
+                <div class="form-group">
+                    <label for="userName">Full Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="userName" name="name" placeholder="e.g. Alice Smith" required autofocus>
+                </div>
+
+                <!-- User Age -->
+                <div class="form-group">
+                    <label for="userAge">Age (in years) <span style="color: #ef4444;">*</span></label>
+                    <input type="number" id="userAge" name="age" placeholder="e.g. 19" min="1" max="125" required>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <span>🛡️</span> Check Site Authorization
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                        <span>🔄</span> Reset Form
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
