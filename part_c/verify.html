@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 10 (c) - Age Verification Result</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Lab 10 Home</a>
+
+        <div class="card">
+            <h2 class="card-title">Authorization Status</h2>
+            <p class="card-desc">Result of age verification based on input credentials.</p>
+
+            <!-- Status Banner Message -->
+            <div id="authBox" class="auth-box">
+                <div id="authIcon" class="auth-icon"></div>
+                <div>
+                    <div id="authHeadline" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; margin-bottom: 4px;"></div>
+                    <div id="authMessage" class="auth-message"></div>
+                </div>
+            </div>
+
+            <!-- Submission Details Summary -->
+            <table class="info-table">
+                <tbody>
+                    <tr>
+                        <th>👤 Name</th>
+                        <td><strong id="outName">User</strong></td>
+                    </tr>
+                    <tr>
+                        <th>🎂 Submitted Age</th>
+                        <td><span id="outAge">0</span> years old</td>
+                    </tr>
+                    <tr>
+                        <th>⚖️ Legal Age Threshold</th>
+                        <td>18 years minimum</td>
+                    </tr>
+                    <tr>
+                        <th>📋 Authorization Verdict</th>
+                        <td id="outVerdict"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="btn-group">
+                <a href="index.html" class="btn btn-primary">
+                    <span>←</span> Check Another Name &amp; Age
+                </a>
+                <a href="../index.html" class="btn btn-secondary">
+                    <span>🏠</span> Lab 10 Home
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name') || 'Guest';
+        const age = parseInt(urlParams.get('age') || '0', 10);
+
+        document.getElementById('outName').textContent = name;
+        document.getElementById('outAge').textContent = age;
+
+        const authBox = document.getElementById('authBox');
+        const authIcon = document.getElementById('authIcon');
+        const authHeadline = document.getElementById('authHeadline');
+        const authMessage = document.getElementById('authMessage');
+        const outVerdict = document.getElementById('outVerdict');
+
+        // Part C Requirement Logic:
+        // If age < 18: "Hello <name>, you are not authorized to visit the site"
+        // Otherwise:   "Welcome <name> to this site"
+        if (age < 18) {
+            authBox.className = 'auth-box denied';
+            authIcon.textContent = '⛔';
+            authHeadline.textContent = 'Access Denied';
+            authMessage.textContent = `Hello ${name}, you are not authorized to visit the site.`;
+            outVerdict.innerHTML = `<span style="background: #fee2e2; color: #991b1b; padding: 4px 12px; border-radius: 20px; font-weight: 700;">❌ Unauthorized (Age < 18)</span>`;
+            document.title = 'Lab 10 (c) - Access Denied';
+        } else {
+            authBox.className = 'auth-box granted';
+            authIcon.textContent = '🎉';
+            authHeadline.textContent = 'Access Granted';
+            authMessage.textContent = `Welcome ${name} to this site.`;
+            outVerdict.innerHTML = `<span style="background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 20px; font-weight: 700;">✅ Authorized (Age ≥ 18)</span>`;
+            document.title = 'Lab 10 (c) - Access Granted';
+        }
+    </script>
+
+</body>
+</html>
