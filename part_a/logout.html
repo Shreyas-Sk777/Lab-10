@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Logout Summary</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Lab 10 Home</a>
+
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 3.5rem; margin-bottom: 10px;">🙏</div>
+            
+            <!-- Requirement: Thank You message with the duration of usage -->
+            <h2 class="card-title" style="font-size: 2rem; color: #15803d;">
+                Thank You, <span id="thankYouName">User</span>!
+            </h2>
+            <p class="card-desc" style="text-align: center;">You have been logged out successfully. Here is your session summary:</p>
+
+            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 24px; margin-bottom: 24px; text-align: left;">
+                <table class="info-table" style="margin: 0;">
+                    <tbody>
+                        <tr>
+                            <th>👤 User Name</th>
+                            <td id="outName">User</td>
+                        </tr>
+                        <tr>
+                            <th>⏰ Session Started</th>
+                            <td id="outStartTime">--:--:--</td>
+                        </tr>
+                        <tr>
+                            <th>🚪 Session Ended</th>
+                            <td id="outEndTime">--:--:--</td>
+                        </tr>
+                        <tr>
+                            <th>⏳ Duration of Usage</th>
+                            <td>
+                                <span id="outDuration" style="background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 20px; font-weight: 700;">
+                                    0 seconds
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>🔒 Session Status</th>
+                            <td><span style="color: #64748b;">Terminated &amp; Destroyed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-group" style="justify-content: center;">
+                <a href="index.html" class="btn btn-primary">
+                    <span>🔄</span> Login Again
+                </a>
+                <a href="../index.html" class="btn btn-secondary">
+                    <span>🏠</span> Lab 10 Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userName = sessionStorage.getItem('lab10_user_name') || 'Guest';
+        const startTimeStr = sessionStorage.getItem('lab10_start_time_str') || 'N/A';
+        const startTimestamp = parseInt(sessionStorage.getItem('lab10_start_timestamp') || Date.now().toString());
+        
+        const now = new Date();
+        const endTimeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+        // Calculate usage duration in seconds
+        const durationSeconds = Math.max(0, Math.floor((Date.now() - startTimestamp) / 1000));
+        const minutes = Math.floor(durationSeconds / 60);
+        const seconds = durationSeconds % 60;
+
+        let durationText = '';
+        if (minutes > 0) {
+            durationText = `${minutes} minute(s) and ${seconds} second(s) (${durationSeconds} total seconds)`;
+        } else {
+            durationText = `${durationSeconds} second(s)`;
+        }
+
+        document.getElementById('thankYouName').textContent = userName;
+        document.getElementById('outName').textContent = userName;
+        document.getElementById('outStartTime').textContent = startTimeStr;
+        document.getElementById('outEndTime').textContent = endTimeStr;
+        document.getElementById('outDuration').textContent = durationText;
+
+        // Requirement: Clear and destroy session on logout
+        sessionStorage.removeItem('lab10_user_name');
+        sessionStorage.removeItem('lab10_start_timestamp');
+        sessionStorage.removeItem('lab10_start_time_str');
+        sessionStorage.removeItem('lab10_start_date_str');
+    </script>
+
+</body>
+</html>

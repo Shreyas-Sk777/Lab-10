@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 10 (a) - User Login &amp; Session Tracker</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Lab 10 Home</a>
+
+        <div class="card">
+            <h2 class="card-title">Part A: Session &amp; Duration Tracker</h2>
+            <p class="card-desc">Enter your name to begin your session. The system will track your login start time and usage duration.</p>
+
+            <form id="sessionForm">
+                <div class="form-group">
+                    <label for="userName">Enter Your Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="userName" name="name" placeholder="e.g. John Doe" required autofocus autocomplete="off">
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <span>🚀</span> Submit &amp; Start Session
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                        <span>🔄</span> Clear
+                    </button>
+                </div>
+            </form>
+
+            <div style="margin-top: 20px; font-size: 0.82rem; color: #64748b; text-align: center;">
+                📄 PHP Source: <a href="index.php" style="color: #2563eb;">index.php</a> &bull; <a href="hello.php" style="color: #2563eb;">hello.php</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if already in active session
+        if (sessionStorage.getItem('lab10_user_name')) {
+            window.location.href = 'hello.html';
+        }
+
+        const form = document.getElementById('sessionForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('userName').value.trim();
+            if (!name) return;
+
+            // Emulate PHP session_start() & $_SESSION['user_name'], $_SESSION['start_timestamp']
+            const now = new Date();
+            sessionStorage.setItem('lab10_user_name', name);
+            sessionStorage.setItem('lab10_start_timestamp', Date.now().toString());
+            sessionStorage.setItem('lab10_start_time_str', now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
+            sessionStorage.setItem('lab10_start_date_str', now.toLocaleDateString('en-GB'));
+
+            window.location.href = 'hello.html';
+        });
+    </script>
+
+</body>
+</html>

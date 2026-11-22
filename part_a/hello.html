@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello User - Active Session</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Card with Top-Right Start Time Indicator -->
+        <div class="card" style="padding-top: 50px;">
+            
+            <!-- Requirement: Start time at the right top corner of the page -->
+            <div class="top-right-timer" title="Session Start Time">
+                <span class="timer-label">⏱️ Start Time:</span>
+                <span id="topRightTime" class="timer-value">--:--:--</span>
+            </div>
+
+            <h2 class="card-title" style="font-size: 2.2rem; color: #1e3a8a;">
+                Hello, <span id="helloName" style="color: #2563eb;">User</span>! 👋
+            </h2>
+            <p class="card-desc">Welcome to your dashboard. Your session is active and being recorded in session memory.</p>
+
+            <table class="info-table">
+                <tbody>
+                    <tr>
+                        <th>👤 Logged In As</th>
+                        <td id="outUserName">User</td>
+                    </tr>
+                    <tr>
+                        <th>📅 Session Date</th>
+                        <td id="outStartDate">--/--/----</td>
+                    </tr>
+                    <tr>
+                        <th>⏰ Start Time</th>
+                        <td><span id="outStartTime" style="color: #2563eb; font-weight: 700;">--:--:--</span></td>
+                    </tr>
+                    <tr>
+                        <th>🟢 Session Status</th>
+                        <td><span style="color: #16a34a; font-weight: 700;">Active</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background: #f1f5f9; padding: 14px 18px; border-radius: 8px; margin: 20px 0; font-size: 0.92rem; color: #475569;">
+                💡 <em>Click the <strong>Logout</strong> button below whenever you're finished. You will be taken to a logout summary page showing your total duration of usage.</em>
+            </div>
+
+            <!-- Requirement: Provides a logout button -->
+            <form action="logout.html" method="GET" style="margin-top: 15px;">
+                <button type="submit" class="btn btn-danger" style="width: 100%; padding: 14px;">
+                    <span>🚪</span> Logout from Session
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        const userName = sessionStorage.getItem('lab10_user_name');
+        const startTimeStr = sessionStorage.getItem('lab10_start_time_str');
+        const startDateStr = sessionStorage.getItem('lab10_start_date_str');
+
+        if (!userName) {
+            window.location.href = 'index.html';
+        } else {
+            document.getElementById('helloName').textContent = userName;
+            document.getElementById('outUserName').textContent = userName;
+            document.getElementById('topRightTime').textContent = startTimeStr || '--:--:--';
+            document.getElementById('outStartTime').textContent = startTimeStr || '--:--:--';
+            document.getElementById('outStartDate').textContent = startDateStr || new Date().toLocaleDateString('en-GB');
+            document.title = `Hello ${userName} - Active Session`;
+        }
+    </script>
+
+</body>
+</html>
