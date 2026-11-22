@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 10 (b) - Current Date, Time and Day</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Lab 10 Home</a>
+
+        <div class="card">
+            <h2 class="card-title">Part B: Current Date, Time &amp; Day</h2>
+            <p class="card-desc">Interactive live display demonstrating server-equivalent date/time generation with built-in PHP functions.</p>
+
+            <!-- Main Display Cards -->
+            <div class="datetime-display">
+                <!-- Day Card -->
+                <div class="dt-card">
+                    <div class="icon">📅</div>
+                    <div class="title">Current Day</div>
+                    <div class="value" id="dispDay" style="color: #7c3aed;">Loading...</div>
+                    <small id="dispShortDay" style="color: #64748b;">--</small>
+                </div>
+
+                <!-- Date Card -->
+                <div class="dt-card">
+                    <div class="icon">🗓️</div>
+                    <div class="title">Current Date</div>
+                    <div class="value" id="dispDate" style="color: #059669;">Loading...</div>
+                    <small id="dispFormalDate" style="color: #64748b;">--</small>
+                </div>
+
+                <!-- Time Card -->
+                <div class="dt-card time-card">
+                    <div class="icon">⏰</div>
+                    <div class="title">Current Time</div>
+                    <div class="value" id="dispTime12">--:--:--</div>
+                    <small id="dispTime24" style="color: #64748b;">24-Hr: --:--:--</small>
+                </div>
+            </div>
+
+            <!-- Detailed Breakdown Table -->
+            <table class="info-table" style="margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="background: #1e3a8a; color: white; text-align: center; border-radius: 6px 6px 0 0;">
+                            Timestamp Specifications
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>🗓️ Day of Week (<code>date('l')</code>)</th>
+                        <td><strong id="tblDay">--</strong></td>
+                    </tr>
+                    <tr>
+                        <th>📆 Formatted Date (<code>date('d-m-Y')</code>)</th>
+                        <td><strong id="tblDate">--</strong></td>
+                    </tr>
+                    <tr>
+                        <th>⏰ 12-Hour Time (<code>date('h:i:s A')</code>)</th>
+                        <td><span id="tblTime12" style="color: #2563eb; font-weight: 700;">--</span></td>
+                    </tr>
+                    <tr>
+                        <th>⏱️ 24-Hour Time (<code>date('H:i:s')</code>)</th>
+                        <td><span id="tblTime24">--</span></td>
+                    </tr>
+                    <tr>
+                        <th>🌍 Timezone</th>
+                        <td id="tblTz">Asia/Kolkata (IST)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- PHP Code Snippet -->
+            <div style="background: #0f172a; color: #f8fafc; padding: 18px 22px; border-radius: 10px; margin-top: 24px; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; overflow-x: auto;">
+                <div style="color: #94a3b8; margin-bottom: 8px;">// PHP Core Code Used in this Script (part_b.php / index.php)</div>
+                <div><span style="color: #f43f5e;">date_default_timezone_set</span>(<span style="color: #a5f3fc;">'Asia/Kolkata'</span>);</div>
+                <div><span style="color: #38bdf8;">$currentDay</span>  = <span style="color: #f43f5e;">date</span>(<span style="color: #a5f3fc;">'l'</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #64748b;">// Full day name</span></div>
+                <div><span style="color: #38bdf8;">$currentDate</span> = <span style="color: #f43f5e;">date</span>(<span style="color: #a5f3fc;">'d-m-Y'</span>); &nbsp;&nbsp;&nbsp;<span style="color: #64748b;">// Date format d-m-Y</span></div>
+                <div><span style="color: #38bdf8;">$currentTime</span> = <span style="color: #f43f5e;">date</span>(<span style="color: #a5f3fc;">'h:i:s A'</span>); <span style="color: #64748b;">// 12-hour time with AM/PM</span></div>
+            </div>
+
+            <div class="btn-group" style="justify-content: center; margin-top: 24px;">
+                <button type="button" class="btn btn-primary" onclick="updateTime()">
+                    <span>🔄</span> Refresh Date &amp; Time
+                </button>
+                <a href="../index.html" class="btn btn-secondary">
+                    <span>🏠</span> Lab 10 Home
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const shortDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            const dayName = days[now.getDay()];
+            const shortDayName = shortDays[now.getDay()];
+            const d = String(now.getDate()).padStart(2, '0');
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const y = now.getFullYear();
+
+            const dateStr = `${d}-${m}-${y}`;
+            const formalDateStr = `${months[now.getMonth()]} ${now.getDate()}, ${y}`;
+
+            const time12Str = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            const time24Str = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+
+            document.getElementById('dispDay').textContent = dayName;
+            document.getElementById('dispShortDay').textContent = shortDayName;
+            document.getElementById('dispDate').textContent = dateStr;
+            document.getElementById('dispFormalDate').textContent = formalDateStr;
+            document.getElementById('dispTime12').textContent = time12Str;
+            document.getElementById('dispTime24').textContent = `24-Hr: ${time24Str}`;
+
+            document.getElementById('tblDay').textContent = dayName;
+            document.getElementById('tblDate').textContent = dateStr;
+            document.getElementById('tblTime12').textContent = time12Str;
+            document.getElementById('tblTime24').textContent = time24Str;
+            document.getElementById('tblTz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Kolkata';
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+
+</body>
+</html>
