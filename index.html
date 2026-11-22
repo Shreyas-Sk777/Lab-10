@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Programming Lab 10 - Web Applications</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .banner-gh-pages {
+            background: linear-gradient(90deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            font-size: 0.88rem;
+            padding: 10px 18px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Live GitHub Pages Banner -->
+        <div class="banner-gh-pages">
+            <span>🚀 <strong>Live on GitHub Pages</strong> &bull; Client-Side Emulation + Full PHP Source Included</span>
+            <span style="font-size: 0.8rem; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 4px;">Lab 10</span>
+        </div>
+
+        <!-- Main Header -->
+        <header class="main-header">
+            <h1>Web Programming - Lab 10</h1>
+            <p>PHP Server-Side Web Applications &amp; Live GitHub Pages Showcase</p>
+        </header>
+
+        <!-- Navigation Portal Cards -->
+        <div class="portal-grid">
+            
+            <!-- Part A -->
+            <a href="part_a/index.html" class="portal-card">
+                <div class="portal-info">
+                    <div class="portal-badge">A</div>
+                    <div class="portal-content">
+                        <h3>Session &amp; Usage Duration Tracker</h3>
+                        <p>Accepts user name, starts session, displays start time in top-right corner, and on logout computes total duration of usage.</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">→</div>
+            </a>
+
+            <!-- Part B -->
+            <a href="part_b/index.html" class="portal-card">
+                <div class="portal-info">
+                    <div class="portal-badge" style="background: #f0fdf4; color: #16a34a;">B</div>
+                    <div class="portal-content">
+                        <h3>Current Date, Time &amp; Day Script</h3>
+                        <p>Displays current server day of the week, formatted date, 12-hr and 24-hr time, with exact PHP code references.</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">→</div>
+            </a>
+
+            <!-- Part C -->
+            <a href="part_c/index.html" class="portal-card">
+                <div class="portal-info">
+                    <div class="portal-badge" style="background: #fef2f2; color: #dc2626;">C</div>
+                    <div class="portal-content">
+                        <h3>Age Verification Gatekeeper</h3>
+                        <p>HTML form capturing Name and Age. Verifies if Age &lt; 18 (Unauthorized page) or Age &ge; 18 (Welcome page).</p>
+                    </div>
+                </div>
+                <div class="arrow-icon">→</div>
+            </a>
+
+        </div>
+
+        <!-- Information Footer Card -->
+        <div class="card" style="margin-top: 30px; padding: 22px 28px; background: #ffffff;">
+            <h4 style="margin-bottom: 8px; color: #1e293b; font-size: 1rem;">📋 Source Code Reference for Evaluation:</h4>
+            <p style="color: #64748b; font-size: 0.92rem; line-height: 1.6; margin-bottom: 8px;">
+                The complete PHP backend implementations are included directly in this repository for academic evaluation:
+            </p>
+            <ul style="color: #475569; font-size: 0.88rem; padding-left: 20px; line-height: 1.6;">
+                <li><strong>Part A PHP</strong>: <code>part_a/index.php</code>, <code>part_a/hello.php</code>, <code>part_a/logout.php</code></li>
+                <li><strong>Part B PHP</strong>: <code>part_b/index.php</code>, <code>part_b.php</code></li>
+                <li><strong>Part C PHP</strong>: <code>part_c/index.html</code>, <code>part_c/verify.php</code></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

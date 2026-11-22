@@ -1,81 +1,51 @@
-# Web Programming Lab 10 - PHP Applications
+# Web Programming Lab 10 - Web Applications (PHP & GitHub Pages)
 
-This directory contains solutions for **Lab 10**, implementing three server-side web applications using PHP.
-
----
-
-## Directory Structure
-
-```text
-Lab 10/
-├── index.php                 # Master navigation portal linking all 3 applications
-├── style.css                 # Unified modern stylesheet
-├── part_b.php                # Root shortcut for Part B
-├── part_c.html               # Root shortcut for Part C
-├── part_a/                   # Part A: Session & Usage Duration Tracker
-│   ├── index.php             # Input form for Name
-│   ├── hello.php             # Hello greeting with start time in top-right corner & logout button
-│   └── logout.php            # Logout summary page displaying duration of usage & session destruction
-├── part_b/                   # Part B: Current Date, Time and Day
-│   └── index.php             # PHP script using date() functions
-└── part_c/                   # Part C: Age Authorization Gatekeeper
-    ├── index.html            # HTML form taking Name and Age
-    └── verify.php            # PHP validation (< 18 unauthorized vs >= 18 welcome)
-```
+This repository contains solutions for **Lab 10**, implementing three server-side web applications using PHP, accompanied by a live static client-side layer to run smoothly on **GitHub Pages**.
 
 ---
 
-## Application Overviews
+## Live Applications on GitHub Pages
 
-### Part A: Session & Usage Duration Tracker
-- **Requirements**:
-  - Takes a name as input.
-  - Submits to `hello.php` which greets the user with the name taken from the request.
-  - Shows the start time at the right top corner of the page.
-  - Provides a **Logout** button.
-  - Clicking **Logout** displays a logout page with a "Thank You" message and the total duration of usage.
-  - Uses PHP `$_SESSION` to store the name and start timestamp.
-- **Files**:
-  - `part_a/index.php`
-  - `part_a/hello.php`
-  - `part_a/logout.php`
-
-### Part B: Current Date, Time and Day
-- **Requirements**:
-  - PHP script displaying the current Date, Time, and Day.
-- **Key PHP Functions**:
-  - `date('l')` - Current day of week (e.g., `Tuesday`)
-  - `date('d-m-Y')` - Current date (e.g., `17-11-2026`)
-  - `date('h:i:s A')` - Current 12-hour time with AM/PM (e.g., `10:05:30 AM`)
-- **Files**:
-  - `part_b/index.php` / `part_b.php`
-
-### Part C: Age Authorization Gatekeeper
-- **Requirements**:
-  - Takes Name and Age from an HTML page.
-  - If `age < 18`: displays *"Hello \<name\>, you are not authorized to visit the site"*.
-  - Otherwise (`age >= 18`): displays *"Welcome \<name\> to this site"*.
-- **Files**:
-  - `part_c/index.html` / `part_c.html`
-  - `part_c/verify.php`
+When deployed to GitHub Pages:
+- **Main Portal**: `index.html` connects to all three interactive applications.
+- **Part A**: `part_a/index.html` &rarr; `part_a/hello.html` (Start time in top-right corner) &rarr; `part_a/logout.html` (Thank you & usage duration).
+- **Part B**: `part_b/index.html` &rarr; Dynamic date, time (12hr/24hr), and day display.
+- **Part C**: `part_c/index.html` &rarr; Age verification gatekeeper (&lt; 18 Unauthorized vs &ge; 18 Welcome).
 
 ---
 
-## How to Run
+## Complete PHP Server-Side Source (Included for Evaluation)
 
-Because these applications use server-side PHP and sessions, they must be run through a PHP server.
+Professors evaluating the PHP scripts will find the clean backend implementations here:
 
-### Option 1: Built-in PHP Server (Fastest)
-1. Open PowerShell or Command Prompt in the `Lab 10` folder:
+| Part | Description | PHP Source Files |
+| :--- | :--- | :--- |
+| **Part A** | Name input, session tracking, start time at top-right corner, logout duration | `part_a/index.php`, `part_a/hello.php`, `part_a/logout.php` |
+| **Part B** | Display current Date, Time, and Day using PHP `date()` | `part_b/index.php`, `part_b.php` |
+| **Part C** | Age authorization (&lt; 18 unauthorized vs &ge; 18 welcome) | `part_c/index.html`, `part_c/verify.php` |
+
+---
+
+## How to Deploy to GitHub Pages
+
+1. Create a repository on GitHub named `Lab-10` (or `Lab10`).
+2. Run in terminal:
    ```powershell
    cd "d:\Web Programming Labs\Lab 10"
-   php -S localhost:8000
+   git remote add origin https://github.com/<your-username>/Lab-10.git
+   git branch -M main
+   git push -u origin main
    ```
-2. Open your web browser and navigate to:
-   [http://localhost:8000](http://localhost:8000)
+3. In GitHub repo **Settings** &rarr; **Pages**, set branch to `main` and save.
+4. Your live app is accessible at:
+   `https://<your-username>.github.io/Lab-10/`
 
-### Option 2: XAMPP / WAMP
-1. Copy or link `Lab 10` into your `C:\xampp\htdocs\` folder.
-2. Start Apache from the XAMPP Control Panel.
-3. Open:
-   [http://localhost/Lab%2010/](http://localhost/Lab%2010/)
+---
+
+## How to Run Locally with PHP
+
+```powershell
+cd "d:\Web Programming Labs\Lab 10"
+php -S localhost:8000
+```
+Then visit [http://localhost:8000/index.php](http://localhost:8000/index.php).
